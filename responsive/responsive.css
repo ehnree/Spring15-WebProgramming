@@ -9,58 +9,64 @@ div.software {
 	width:128px;
 }
 
-	@media only screen and (max-width: 400px)
-	{
-		div.software{
-			background:url(software.png) -512px -240px;
-		}
+@media only screen and (max-width: 400px)
+{
+	div.software{
+		background:url(software.png) -512px -240px;
 	}
-	@media screen and (min-width: 401px) and (max-width: 500px)
-	{
-		div.software {
+}
+@media screen and (min-width: 401px) and (max-width: 500px)
+{
+	div.software {
 		background:url(software.png) -384px -240px;
 	}
-	}
-	@media screen and (min-width: 501px) and (max-width: 600px)
-	{
-		div.software {
+}
+@media screen and (min-width: 501px) and (max-width: 600px)
+{
+	div.software {
 		background:url(software.png) -256px -240px;
 	}
-	}@media screen and (min-width: 601px) and (max-width: 700px)
-	{
-		div.software {
+}
+@media screen and (min-width: 601px) and (max-width: 700px)
+{
+	div.software {
 		background:url(software.png) -128px -240px;
 	}
-	}@media screen and (min-width: 701px) and (max-width: 800px)
-	{
-		div.software {
+}
+@media screen and (min-width: 701px) and (max-width: 800px)
+{
+	div.software {
 		background:url(software.png) 0px -240px;
 	}
-	}@media screen and (min-width: 801px) and (max-width: 900px)
-	{
-		div.software {
+}
+@media screen and (min-width: 801px) and (max-width: 900px)
+{
+	div.software {
 		background:url(software.png) -512px 0px;
 	}
-	}@media screen and (min-width: 901px) and (max-width: 1000px)
-	{
-		div.software {
+}
+@media screen and (min-width: 901px) and (max-width: 1000px)
+{
+	div.software {
 		background:url(software.png) -384px 0px;
 	}
-	}@media screen and (min-width: 1001px) and (max-width: 1100px)
-	{
-		div.software {
+}
+@media screen and (min-width: 1001px) and (max-width: 1100px)
+{
+	div.software {
 		background:url(software.png) -256px 0px;
 	}
-	}@media screen and (min-width: 1101px) and (max-width: 1200px)
-	{
-		div.software {
+}
+@media screen and (min-width: 1101px) and (max-width: 1200px)
+{
+	div.software {
 		background:url(software.png) -128px 0px;
 	}
-	}
+}
 
-	@media screen and (min-width: 1201px)
-	{
-		div.software {
+@media screen and (min-width: 1201px)
+{
+	div.software {
 		background:url(software.png) 0px 0px;
 	}
-	}
+}
