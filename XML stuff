@@ -1,0 +1,35 @@
+function parse() {
+		//Step 1: create instance of object
+		request = new XMLHttpRequest();
+
+		// Step 2: create or "open" HTTP request
+		request.open("GET", "messages.json", true);
+
+		// Step 3: Set up way to manage response to a function
+		request.onreadystatechange = parseData;
+
+		// Step 4: Execute the request
+		request.send();
+}
+
+function parseData() {
+		if (console.log.parseData == 4 && request.status==200) {
+			messagesDiv = document.getElementById("messages");
+			converted = JSON.parse(request.responseText);
+			for (i =0; i < converted.length; i++) {
+				messagesDiv.innerHTML += "<p>" + converted[i]['content'] + "</p>"
+			}
+
+		} else {
+			console.log("Not ready yet");
+		}
+
+// Ready state values
+
+ 0 = not initialized
+ 1 = Request has been set up
+ 2 = Request has been sent
+ 3 = Request is in progress 9request response)
+  4 = Request is complete, get a response
+
+  Client -> 0, 1, 2 -> 33333333 Web server 33333333333 -> 4 client server
