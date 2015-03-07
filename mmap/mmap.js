@@ -4,7 +4,7 @@
 
 
 /* Initialize vars and objects (Google map) */ 
-var map;
+/*var map;
 
 function initialize() {
 	var mapOptions = {
@@ -16,7 +16,7 @@ function initialize() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
+*/
 /* retrive current information */
 
 /* send information to database */
