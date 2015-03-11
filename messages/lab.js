@@ -18,13 +18,13 @@ function parse(){
 }
 
 function parseData(){
-	console.log("In parseData" + request.readyState);
+	//console.log("In parseData" + request.readyState);
 	messagesDiv = document.getElementById("messages");
-	converted = JSON.parse(request.responseText);
 	from = " written by: ";
 
-	//Only edit text once XMLrequest is complete! 
+	//Only parse/edit text once XMLrequest is complete! 
 	if (request.readyState == 4) {
+		converted = JSON.parse(request.responseText);
 		for (i = 0; i < converted.length; i++){
 			messagesDiv.innerHTML += "<p>" + converted[i]['content'] + "</p>" 
 			+ "<p>" + from + converted[i]['username'] + "</p>";
