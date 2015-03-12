@@ -4,20 +4,51 @@
 
 
 /* Initialize vars and objects (Google map) */ 
-/*var map;
+
+var latitude;
+var longitude; 
 
 function initialize() {
+	console.log("in initialize");
+	findMe();
+	console.log("finished findMe");
+
 	var mapOptions = {
 		zoom: 8,
-		center: new google.maps.LatLng(-34.397, 150.644)
+		center: new google.maps.LatLng(latitude, longitude)
 	};
-	map = new google.maps.Map(document.getElementById('map-canvas'),
+
+	var map = new google.maps.Map(document.getElementById("map-canvas"),
 		mapOptions);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-*/
-/* retrive current information */
+
+/* get current location */
+
+function findMe() {
+	console.log("running findMe");
+	if (!navigator.geolocation){
+		console.log("Geolocation unavailable in your browser!");
+		return;
+	}
+	navigator.geolocation.getCurrentPosition(success, error);
+	function success(position) {
+		latitude  = position.coords.latitude;
+		longitude = position.coords.longitude;
+		console.log("Lat: " + latitude);
+		console.log("Long: " + longitude);
+	}
+
+	function error() {
+    	console.log("Unable to retrieve your location");
+    };
+
+}
+
+
+
+/* retrieve current information */
 
 /* send information to database */
 
