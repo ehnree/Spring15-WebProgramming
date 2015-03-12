@@ -10,7 +10,27 @@ var longitude;
 
 function initialize() {
 	console.log("in initialize");
-	findMe();
+	/* get current location */
+
+	function findMe() {
+		console.log("running findMe");
+		if (!navigator.geolocation){
+			console.log("Geolocation unavailable in your browser!");
+			return;
+		}
+		navigator.geolocation.getCurrentPosition(success, error);
+		function success(position) {
+			latitude  = position.coords.latitude;
+			longitude = position.coords.longitude;
+			console.log("Lat: " + latitude);
+			console.log("Long: " + longitude);
+		}
+
+		function error() {
+	    	console.log("Unable to retrieve your location");
+	    };
+
+	}
 	console.log("finished findMe");
 
 	var mapOptions = {
@@ -23,30 +43,6 @@ function initialize() {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-
-/* get current location */
-
-function findMe() {
-	console.log("running findMe");
-	if (!navigator.geolocation){
-		console.log("Geolocation unavailable in your browser!");
-		return;
-	}
-	navigator.geolocation.getCurrentPosition(success, error);
-	function success(position) {
-		latitude  = position.coords.latitude;
-		longitude = position.coords.longitude;
-		console.log("Lat: " + latitude);
-		console.log("Long: " + longitude);
-	}
-
-	function error() {
-    	console.log("Unable to retrieve your location");
-    };
-
-}
-
-
 
 /* retrieve current information */
 
