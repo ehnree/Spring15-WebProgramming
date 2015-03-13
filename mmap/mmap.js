@@ -44,7 +44,8 @@ function findMe() {
 	var marker = new google.maps.Marker({
       position: myLatlng,
       map: map,
-      title: 'Hello World!'
+      title: 'My Location',
+      icon: 'rfh.png'
   	});
 
 	sendMyLocation();
@@ -60,7 +61,7 @@ function findMe() {
 function sendMyLocation(){
 	request = new XMLHttpRequest();
 	url = "https://secret-about-box.herokuapp.com/sendLocation";
-	params = "\"login=" + login + "&lat=" + latitude + "&lng=" + longitude + "\"";
+	params = "login=" + login + "&lat=" + latitude + "&lng=" + longitude;
 	console.log(params);
 	console.log(url);
 	request.open("POST", url, true);
@@ -80,9 +81,7 @@ function parseData(){
 	//Only parse/edit text once XMLrequest is complete! 
 	if (request.readyState == 4 && request.status == 200) {
 		converted = JSON.parse(request.responseText);
-		for (i = 0; i < converted.length; i++) {
-			alert("converted[i]['login']");
-		}
+		console.log(converted);
 	}
 }
 
