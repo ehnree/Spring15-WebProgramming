@@ -46,7 +46,7 @@ function findMe() {
       map: map,
       title: 'Hello World!'
   	});
-  	
+
 	sendMyLocation();
 	}
 
@@ -60,16 +60,30 @@ function findMe() {
 function sendMyLocation(){
 	request = new XMLHttpRequest();
 	url = "https://secret-about-box.herokuapp.com/sendLocation";
-	params = "login=" + login + "&lat=" + latitude + "&lng=" + longitude;
+	params = "\"login=" + login + "&lat=" + latitude + "&lng=" + longitude + "\"";
 	console.log(params);
+	console.log(url);
 	request.open("POST", url, true);
 
 	//Send request w/ proper header info 
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
+	
+	request.onreadystatechange = parseData;
+	
 	request.send(params);
 }
 
 /* retrieve locations of people in the class on the map */
+
+function parseData(){
+	console.log("In parseData: " + request.readyState);
+	//Only parse/edit text once XMLrequest is complete! 
+	if (request.readyState == 4 && request.status == 200) {
+		converted = JSON.parse(request.responseText);
+		for (i = 0; i < converted.length; i++) {
+			alert("converted[i]['login']");
+		}
+	}
+}
 
 /* Display previous information */ 
