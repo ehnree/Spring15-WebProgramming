@@ -10,29 +10,19 @@ var login = "BenJohnson";
 var map;
 var R = 6371;
 
-function initialize() {
-	console.log("in initialize");
-
-
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
 
 /* get current location */
 
 function findMe() {
-	console.log("running findMe");
+	
 	if (!navigator.geolocation){
-		console.log("Geolocation unavailable in your browser!");
+		alert("Geolocation unavailable in your browser!");
 		return;
 	}
 	navigator.geolocation.getCurrentPosition(success, error);
 	function success(position) {
 		latitude  = position.coords.latitude;
 		longitude = position.coords.longitude;
-		console.log("Lat: " + latitude);
-		console.log("Long: " + longitude);
-		console.log("finished findMe");
 		var mapOptions = {
 		zoom: 18,
 		center: new google.maps.LatLng(latitude, longitude)
@@ -41,7 +31,6 @@ function findMe() {
 	myLatlng = new google.maps.LatLng(latitude, longitude);
 	    map = new google.maps.Map(document.getElementById("map-canvas"),
 		mapOptions);
-	console.log("map created");
 
 	var marker = new google.maps.Marker({
       position: myLatlng,
@@ -50,11 +39,20 @@ function findMe() {
       icon: 'rfh.png'
   	});
 
+	var infowindow = new google.maps.InfoWindow();
+	google.maps.event.addListener(marker, 'click', (function(marker) {
+        	return function() {
+          		infowindow.setContent("<p>Login: " + login + "<br/>" + 
+          								"Distance: " + 
+          								 distance(latitude, longitude) + " miles </p>");
+          		infowindow.open(map, marker);
+        	}
+    })(marker));
 	sendMyLocation();
 	}
 
 	function error() {
-    	console.log("Unable to retrieve your location");
+    	alert("Unable to retrieve your location :(");
     };
 }
 
@@ -64,8 +62,6 @@ function sendMyLocation(){
 	request = new XMLHttpRequest();
 	url = "https://secret-about-box.herokuapp.com/sendLocation";
 	params = "login=" + login + "&lat=" + latitude + "&lng=" + longitude;
-	console.log(params);
-	console.log(url);
 	request.open("POST", url, true);
 
 	//Send request w/ proper header info 
@@ -79,11 +75,10 @@ function sendMyLocation(){
 /* retrieve locations of people in the class on the map */
 
 function parseData(){
-	console.log("In parseData: " + request.readyState);
 	//Only parse/edit text once XMLrequest is complete! 
 	if (request.readyState == 4 && request.status == 200) {
 		locations = JSON.parse(request.responseText);
-		console.log(locations);
+
 		var infowindow = new google.maps.InfoWindow();
 
 		for (i = 0; i < locations.length; i++) {
@@ -96,7 +91,7 @@ function parseData(){
         	return function() {
           		infowindow.setContent("<p>Login: " + locations[i]['login'] + "<br/>" + 
           								"Distance: " + 
-          								 distance(locations[i]['lat'], locations[i]['lng']) + "miles </p>");
+          								 distance(locations[i]['lat'], locations[i]['lng']) + " miles away</p>");
           		infowindow.open(map, marker);
         	}
       	})(marker, i));
@@ -119,6 +114,6 @@ function distance(user_lat, user_lng) {
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 	var d = R * c * 0.621371; 
 
-	return d;
+	return Math.round(d * 10000) / 10000;
 }
 
