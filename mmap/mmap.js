@@ -8,6 +8,7 @@ var latitude;
 var longitude; 
 var login = "BenJohnson";
 var map;
+var R = 6371;
 
 function initialize() {
 	console.log("in initialize");
@@ -83,15 +84,41 @@ function parseData(){
 	if (request.readyState == 4 && request.status == 200) {
 		locations = JSON.parse(request.responseText);
 		console.log(locations);
+		var infowindow = new google.maps.InfoWindow();
+
 		for (i = 0; i < locations.length; i++) {
-			//console.log(locations[i]['login']);
 			marker = new google.maps.Marker({
 				position: new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']),
 				map:map
-			});
-		}		
+			});	
+		
+			google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        	return function() {
+          		infowindow.setContent("<p>Login: " + locations[i]['login'] + "<br/>" + 
+          								"Distance: " + 
+          								 distance(locations[i]['lat'], locations[i]['lng']) + "miles </p>");
+          		infowindow.open(map, marker);
+        	}
+      	})(marker, i));
+ 	   }		
 	}
 }
 
-/* Display previous information */ 
+function distance(user_lat, user_lng) {
+	Number.prototype.toRad = function() {
+  	  return this * Math.PI / 180;
+	}
+
+	var x1 = latitude-user_lat;
+	var dLat = x1 * Math.PI / 180; 
+	var x2 = longitude-user_lng;
+	var dLon = x2 * Math.PI / 180;  
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+	                Math.cos(latitude.toRad()) * Math.cos(user_lat.toRad()) * 
+	                Math.sin(dLon/2) * Math.sin(dLon/2);  
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	var d = R * c * 0.621371; 
+
+	return d;
+}
 
