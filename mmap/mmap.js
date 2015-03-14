@@ -4,9 +4,10 @@
 
 /* Initialize vars and objects (Google map) */ 
 
-var latitude; //= 42.407455;
-var longitude; //= -71.1208;
+var latitude;
+var longitude; 
 var login = "BenJohnson";
+var map;
 
 function initialize() {
 	console.log("in initialize");
@@ -37,7 +38,7 @@ function findMe() {
 	};
 
 	myLatlng = new google.maps.LatLng(latitude, longitude);
-	var map = new google.maps.Map(document.getElementById("map-canvas"),
+	    map = new google.maps.Map(document.getElementById("map-canvas"),
 		mapOptions);
 	console.log("map created");
 
@@ -80,9 +81,17 @@ function parseData(){
 	console.log("In parseData: " + request.readyState);
 	//Only parse/edit text once XMLrequest is complete! 
 	if (request.readyState == 4 && request.status == 200) {
-		converted = JSON.parse(request.responseText);
-		console.log(converted);
+		locations = JSON.parse(request.responseText);
+		console.log(locations);
+		for (i = 0; i < locations.length; i++) {
+			//console.log(locations[i]['login']);
+			marker = new google.maps.Marker({
+				position: new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']),
+				map:map
+			});
+		}		
 	}
 }
 
 /* Display previous information */ 
+
