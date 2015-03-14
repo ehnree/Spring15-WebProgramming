@@ -82,6 +82,7 @@ function parseData(){
 		var infowindow = new google.maps.InfoWindow();
 
 		for (i = 0; i < locations.length; i++) {
+			if (locations[i]['login'] != login){
 			marker = new google.maps.Marker({
 				position: new google.maps.LatLng(locations[i]['lat'], locations[i]['lng']),
 				map:map
@@ -95,6 +96,7 @@ function parseData(){
           		infowindow.open(map, marker);
         	}
       	})(marker, i));
+ 	   }
  	   }		
 	}
 }
