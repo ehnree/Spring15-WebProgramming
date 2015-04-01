@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Captain's Log</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script>
+	
+  		$("document").ready(function(){
+			$("#msg").change(input);
+			reload(); 
+		});
+
+		function input(){
+		time = new Date;	
+		localStorage[time] = $("#msg").val(); 
+
+		$("#log").prepend("<p>" + time + " - " + $("#msg").val() + "</p>");
+		$("#msg").val("");
+		}
+
+		function reload(){
+			eleme = document.getElementById("log");
+			output = "";
+			for (key in localStorage) {
+				output = output + "<p>" + key + " - " + localStorage[key] + "</p>\n";
+			}
+			$("#log").prepend(output);
+		}
+		
+	</script>
+</head>
+
+<body>
+	<h1>Captain's Log</h1>
+	<h3>New entry: <input type="text" id="msg" name="msg" size="30" /></h3>
+	<div id="log"></div>
+</body>
+</html>
