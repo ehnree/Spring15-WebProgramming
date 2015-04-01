@@ -29,9 +29,9 @@
 		function reload(){
 			output = "";
 			if (localStorage["list"] != null){
-				output += "<p>" + localStorage["list"] + "</p>\n";
-				$("#log").html(output);
+				output += localStorage["list"];
 			}
+			$("#log").html(output);
 			
 		}
 
