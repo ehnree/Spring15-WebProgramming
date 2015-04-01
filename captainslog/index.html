@@ -8,26 +8,26 @@
 	<script>
 	
   		$("document").ready(function(){
+  			reload();
 			$("#msg").change(input);
-			reload(); 
 		});
 
 		function input(){
-		time = new Date;	
-		localStorage[time] = $("#msg").val(); 
+			time = new Date;	
+			localStorage[time] = $("#msg").val(); 
 
-		$("#log").prepend("<p>" + time + " - " + $("#msg").val() + "</p>");
-		$("#msg").val("");
-		}
+			$("#log").prepend("<p>" + time + " - " + $("#msg").val() + " </p>");
+			$("#msg").val("");
+		} 
 
 		function reload(){
-			eleme = document.getElementById("log");
 			output = "";
 			for (key in localStorage) {
 				output = output + "<p>" + key + " - " + localStorage[key] + "</p>\n";
 			}
-			$("#log").prepend(output);
+			$("#log").html(output);
 		}
+
 		
 	</script>
 </head>
