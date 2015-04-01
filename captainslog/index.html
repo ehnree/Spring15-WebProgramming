@@ -28,8 +28,11 @@
 
 		function reload(){
 			output = "";
-			output += "<p>" + localStorage["list"] + "</p>\n";
-			$("#log").html(output);
+			if (localStorage["list"] != null){
+				output += "<p>" + localStorage["list"] + "</p>\n";
+				$("#log").html(output);
+			}
+			
 		}
 
 		
