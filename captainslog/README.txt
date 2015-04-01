@@ -9,7 +9,7 @@ tags and their values. The webpage successfully takes in text input,
 prepends it within a single object (a list of all messages) in HTML format
 with the date it was submitted to the localStorage, prints the message with the date on the page, and clears the text box after submitting. 
 
-
+The webpage also successfully reloads all previous messages from the localStorage when reloading the page with the latest messages at the top of the page. 
 
 2) Brian Williamson assisted me with showing only messages
 sent in from the webpage when accessing the localStorage. 
