@@ -8,13 +8,19 @@
 	<script>
 	
   		$("document").ready(function(){
-  			reload();
 			$("#msg").change(input);
+			reload();
 		});
 
 		function input(){
 			time = new Date;	
 			localStorage[time] = $("#msg").val(); 
+
+			if (localStorage.getItem("list") == null){
+				localStorage.setItem("list", "<p>" + time + " - " + $("#msg").val() + "</p>");
+			} else {
+				localStorage.setItem("list","<p>" + time + " - " + $("#msg").val() + "</p>" + localStorage["list"]);
+			}
 
 			$("#log").prepend("<p>" + time + " - " + $("#msg").val() + " </p>");
 			$("#msg").val("");
@@ -22,9 +28,7 @@
 
 		function reload(){
 			output = "";
-			for (key in localStorage) {
-				output = output + "<p>" + key + " - " + localStorage[key] + "</p>\n";
-			}
+			output += "<p>" + localStorage["list"] + "</p>\n";
 			$("#log").html(output);
 		}
 
