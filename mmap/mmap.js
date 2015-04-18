@@ -1,4 +1,4 @@
-// mmap.js
+ // mmap.js
 // Written by: Henry Zhou
 // Date: 3/6/2015
 
@@ -60,7 +60,7 @@ function findMe() {
 
 function sendMyLocation(){
 	request = new XMLHttpRequest();
-	url = "https://secret-about-box.herokuapp.com/sendLocation";
+	url = "https://lit-dusk-5527.herokuapp.com/sendLocation";
 	params = "login=" + login + "&lat=" + latitude + "&lng=" + longitude;
 	request.open("POST", url, true);
 
