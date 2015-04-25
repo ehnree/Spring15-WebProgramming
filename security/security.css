@@ -1,0 +1,25 @@
+#report {
+	margin-left: 100px;
+	margin-right: 100px;
+	margin-bottom: 50px;
+}
+
+img {
+	margin-left: auto;
+	margin-right: auto;
+	border-style: outset;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+p{
+	font-family: Cambria;
+}
+
+h3{
+	font-family: Cambria;
+}
+
+.label {
+	font-style: italic;
+}
